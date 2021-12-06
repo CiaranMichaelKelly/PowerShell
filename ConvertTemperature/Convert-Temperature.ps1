@@ -1,4 +1,4 @@
-function Convert-Temperature {
+function Convert-f2c {
     <#
     .SYNOPSIS
     
@@ -22,7 +22,7 @@ function Convert-Temperature {
         
     )
     BEGIN { 
-        Write-Verbose "[BEGIN  ] Starting: $($MyInvocation.Mycommand)"  
+        
     }
     
     PROCESS {        
@@ -36,7 +36,48 @@ function Convert-Temperature {
         }
     }
     END { 
-        Write-Verbose "[END  ] Ending: $($MyInvocation.Mycommand)"  
+        
     }
 }
-Convert-Temperature -Verbose
+
+function Convert-c2f {
+    <#
+    .SYNOPSIS
+    
+    .DESCRIPTION
+
+    .PARAMETER 
+
+    .PARAMETER 
+
+    .PARAMETER
+
+    .EXAMPLE
+
+    .EXAMPLE
+    #>
+    
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$True,ValueFromPipeline=$true)]
+        [int]$temp_celcius
+        
+    )
+    BEGIN { 
+          
+    }
+    
+    PROCESS {        
+
+        Try {
+            $temp_fahrenheit = ($temp_celcius * 1.8) + 32
+            Write-Output ("{0:n2}" -f $temp_fahrenheit)
+        }
+        Catch {
+            Write-Error "$($_.Exception.Message) - Line Number: $($_.InvocationInfo.ScriptLineNumber)"
+        }
+    }
+    END { 
+         
+    }
+}
